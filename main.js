@@ -1,17 +1,13 @@
 const {app, BrowserWindow} = require('electron');
-const path = require('path');
 
 app.on('ready', () => {
-    // initialize window to not show
-    const window = new BrowserWindow({
-        show: false
-    });
+    // initialize one parent window
+    const parent = new BrowserWindow();
+    // create a new child window using "parent" prop
+    const child = new BrowserWindow({parent: parent, width: 100, height: 100});
 
-    // load url to window
-    window.loadURL(path.join('file://', __dirname, 'index.html'));
-
-    // when window is ready and all files are loaded, show window
-    window.on('ready-to-show', () => {
-        window.show();
-    });
+    // parent will show beneath
+    parent.show();
+    // child will show on top
+    child.show();
 });
