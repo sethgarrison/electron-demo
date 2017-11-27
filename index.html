@@ -10,6 +10,11 @@
 <body>
 
     <h1>I am an electron app.</h1>
+    <p id="version"></p>
 
+    <script>
+        // using require makes file a node js file automatically - making it an IIFE
+        require('./renderer');
+    </script>
 </body>
 </html>
