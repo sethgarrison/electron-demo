@@ -11,14 +11,13 @@ app.on('ready', () => {
         show: false
     });
 
+    parent.loadURL(`file://${__dirname}/index.html`);
+
     // use load url to show web page
     child.loadURL('https://github.com');
 
-    // parent will show beneath
-    parent.show();
-
     // when child is ready, show
     child.once('ready-to-show', () => {
-        child.show()
-    })
+        child.show();
+    });
 });
