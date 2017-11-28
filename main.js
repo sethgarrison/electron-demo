@@ -1,6 +1,11 @@
-const {app, BrowserWindow, ipcMain, globalShortcut} = require('electron');
+const {app, BrowserWindow, ipcMain, Menu, MenuItem} = require('electron');
 // get setMainMenu method from 'main-menu'
 const {setMainMenu} = require('./main-menu');
+
+const menu = new Menu();
+menu.append(new MenuItem({ label: 'Hello' }));
+menu.append(new MenuItem({ type: 'separator' }));
+menu.append(new MenuItem({ label: 'Electron', type: 'checkbox', checked: true }));
 
 app.on('ready', () => {
     const window = new BrowserWindow({
@@ -18,21 +23,12 @@ app.on('ready', () => {
     setMainMenu(window);
 
     // ipcMain can listen to ipcRenderer messages using `on`
-    ipcMain.on('render-message', (event) => {
-        // the event includes a sender, which can be used to send messages to
-        // the renderer process
-        event.sender.send('main-message', 'message received!');
+    ipcMain.on('show-menu', (event) => {
+        const win = BrowserWindow.fromWebContents(event.sender);
+        menu.popup(win);
     });
 
-    // you can register global shortcuts in the main process
-    globalShortcut.register('CmdOrCtrl+5', () => {
-        // the window object has a `webContents` object which you can
-        // use to send events
-        window.webContents.send('main-message', 'you pressed the magic keys')
+    window.webContents.on('context-menu', (event, params) => {
+        menu.popup(window, params.x, params.y)
     });
-});
-
-// when the app quits, unregister all shortcuts!
-app.on('will-quit', () => {
-    globalShortcut.unregisterAll();
 });
