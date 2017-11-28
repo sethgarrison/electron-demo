@@ -1,6 +1,4 @@
 const {app, BrowserWindow, ipcMain, Menu, MenuItem} = require('electron');
-// get setMainMenu method from 'main-menu'
-const {setMainMenu} = require('./main-menu');
 
 const menu = new Menu();
 menu.append(new MenuItem({ label: 'Hello' }));
@@ -16,13 +14,8 @@ app.on('ready', () => {
 
     window.on('ready-to-show', () => {
         window.show();
-        window.webContents.openDevTools();
     });
 
-    // set main menu needs to be called in ready handler - or it won't work
-    setMainMenu(window);
-
-    // ipcMain can listen to ipcRenderer messages using `on`
     ipcMain.on('show-menu', (event) => {
         const win = BrowserWindow.fromWebContents(event.sender);
         menu.popup(win);
