@@ -1,4 +1,4 @@
-// query dom as usual
-const versionEl = document.querySelector('#version');
-// use node's process variable to grab verison
-versionEl.innerText = process.versions.electron;
+// here we are adding the pid to demonstrate that each
+// browser has a unique renderer process
+const pidEl = document.querySelector('#pid');
+pidEl.innerText = process.pid;
