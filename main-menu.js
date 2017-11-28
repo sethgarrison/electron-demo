@@ -1,11 +1,20 @@
 const {app, Menu} = require('electron');
 
+// import our dialog methods from a separate file
+const {
+    showMessageBox,
+    showOpenDialog,
+    showSaveDialog,
+    showErrorBox
+} = require('./dialogs');
+
+// export our setMainMenu method
 module.exports = {
     setMainMenu
 };
 
 // this is part of the main process, not the renderer.
-function setMainMenu() {
+function setMainMenu(browserWindow) {
     const template = [
         {
             // note: app name will not appear in development - only
@@ -34,6 +43,39 @@ function setMainMenu() {
                 {type: 'separator'},
                 {role: 'undo'},
                 {role: 'redo'}
+            ]
+        },
+        {
+            label: 'File',
+            submenu: [
+                {
+                    label: 'Show Message',
+                    accelerator: 'CmdOrCtrl+M',
+                    click() {
+                        showMessageBox(browserWindow);
+                    }
+                },
+                {
+                    label: 'Open File',
+                    accelerator: 'CmdOrCtrl+O',
+                    click() {
+                        showOpenDialog(browserWindow)
+                    }
+                },
+                {
+                    label: 'Save File',
+                    accelerator: 'CmdOrCtrl+S',
+                    click() {
+                        showSaveDialog(browserWindow)
+                    }
+                },
+                {
+                    label: 'Show Error',
+                    accelerator: 'CmdOrCtrl+E',
+                    click() {
+                        showErrorBox()
+                    }
+                }
             ]
         }
     ];

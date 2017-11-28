@@ -5,3 +5,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 24px;
 }
+
+p {
+    flex: 0 1 auto;
+}

@@ -14,5 +14,5 @@ app.on('ready', () => {
     });
 
     // set main menu needs to be called in ready handler - or it won't work
-    setMainMenu();
+    setMainMenu(window);
 });
