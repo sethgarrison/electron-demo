@@ -1,13 +1,11 @@
 // we require remote from electron here to access
-// properties and methods only available on main process, like dialog, for instance
+// properties and methods only available on main process, like BrowserWindow, for instance
 const {remote} = require('electron');
-const {dialog} = remote;
+const {BrowserWindow} = remote;
 
-const saveButton = document.querySelector('#save-dialog');
+const newWindow = document.querySelector('#new-window');
 
-saveButton.addEventListener('click', () => {
-    // now we can use the dialog methods as we do in the main process
-    dialog.showSaveDialog((filename) => {
-        console.log('filename', filename)
-    });
+newWindow.addEventListener('click', () => {
+    const win = new BrowserWindow({x: 0, y: 0});
+    win.loadURL(`file://${__dirname}/index.html`);
 });
