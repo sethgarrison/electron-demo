@@ -14,6 +14,7 @@ app.on('ready', () => {
 
     window.on('ready-to-show', () => {
         window.show();
+        window.openDevTools();
     });
 
     ipcMain.on('show-menu', (event) => {
