@@ -4,13 +4,14 @@ const {setMainMenu} = require('./main-menu');
 
 app.on('ready', () => {
     const window = new BrowserWindow({
-        shw: false
+        show: false
     });
 
     window.loadURL(`file://${__dirname}/index.html`);
 
     window.on('ready-to-show', () => {
         window.show();
+        window.webContents.openDevTools();
     });
 
     // set main menu needs to be called in ready handler - or it won't work
