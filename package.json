@@ -1,19 +1,27 @@
 {
   "name": "Electron-Demo",
+  "productName": "Electron Demo",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "package": "build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Seth Garrison",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^1.7.9"
+    "electron": "^1.7.9",
+    "electron-builder": "^19.46.9"
   },
   "dependencies": {
-    "devtron": "^1.4.0"
+    "devtron": "^1.4.0",
+    "electron-icon-maker": "0.0.4"
+  },
+  "build": {
+    "appId": "com.L4.ElectronDemo",
+    "files": "!build-assets${/*}"
   }
 }
